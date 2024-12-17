@@ -13,35 +13,34 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Halaman Utama
 Route::get('/', function () {
-    return view('/layouts/app');
-})->name('home');
+    return view('layouts.app');
+});
 
-// Halaman Login
+Route::get('/golongan', ['App\Http\Controllers\GolonganController', 'index'])->name('golongan.index');
+Route::get('/golongan/create', ['App\Http\Controllers\GolonganController', 'create'])->name('golongan.create');
+Route::post('/golongan', ['App\Http\Controllers\GolonganController', 'store'])->name('golongan.store');
+Route::get('/golongan/{id}/edit', ['App\Http\Controllers\GolonganController', 'edit'])->name('golongan.edit');
+Route::delete('/golongan/{id}', ['App\Http\Controllers\GolonganController', 'destroy'])->name('golongan.destroy');
+Route::put('/golongan/{id}', ['App\Http\Controllers\GolonganController', 'update'])->name('golongan.update');
+Route::get('/users', ['App\Http\Controllers\UsersController', 'index'])->name('users.index');
+Route::get('/users/create', ['App\Http\Controllers\UsersController', 'create'])->name('users.create');
+Route::post('/users', ['App\Http\Controllers\UsersController', 'store'])->name('users.store');
+Route::get('/users/{id}/edit', ['App\Http\Controllers\UsersController', 'edit'])->name('users.edit');
+Route::put('/users/{id}', ['App\Http\Controllers\UsersController', 'update'])->name('users.update');
+Route::delete('/users/{id}', ['App\Http\Controllers\UsersController', 'destroy'])->name('users.destroy');
+Route::get('/pelanggan', ['App\Http\Controllers\PelangganController','index']);
+Route::get('/pelanggan/create', ['App\Http\Controllers\PelangganController', 'create'])->name('pelanggan.create');
+Route::post('/pelanggan', ['App\Http\Controllers\PelangganController', 'store'])->name('pelanggan.store');
+Route::get('/pelanggan/{id}/edit', ['App\Http\Controllers\PelangganController', 'edit'])->name('pelanggan.edit');
+Route::put('/pelanggan/{id}', ['App\Http\Controllers\PelangganController', 'update'])->name('pelanggan.update');
+Route::delete('/pelanggan/{id}', ['App\Http\Controllers\PelangganController', 'destroy'])->name('pelanggan.destroy');
+Route::get('/pelanggan', ['App\Http\Controllers\PelangganController', 'index'])->name('pelanggan.index');
+
 Route::get('/login', function () {
-    return view('login'); // Halaman login
-})->name('login');
+    return view('auth.login');
+});
 
-// Halaman Golongan Index
-Route::get('/golongan/index', function () {
-    return view('golongan/index');
-})->name('index');
-
-// Halaman Pelanggan Index
-Route::get('/pelanggan/index', function () {
-    return view('pelanggan/index');
-})->name('index');
-
-// Halaman Users Index
-Route::get('/users/index', function () {
-    return view('users/index');
-})->name('index');
-
-// Rute Terproteksi dengan Middleware Auth
-Route::middleware(['auth'])->group(function () {
-    // Halaman Profil
-    Route::get('/profil', function () {
-        return view('profil'); // Halaman profil user
-    })->name('profil');
+Route::get('/register', function () {
+    return view('auth.register');
 });
